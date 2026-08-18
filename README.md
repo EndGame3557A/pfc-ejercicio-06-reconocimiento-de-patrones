@@ -1,4 +1,4 @@
-# Clase 6 — Reconocimiento de patrones
+# Ejercicio 6 — Reconocimiento de patrones
 
 Fundamentos de Programación Funcional y Concurrente
 Escuela de Ingeniería de Sistemas y Computación, Universidad del Valle
