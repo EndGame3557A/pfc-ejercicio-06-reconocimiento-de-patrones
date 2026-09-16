@@ -56,3 +56,9 @@ task repl(type:JavaExec) {
     standardInput System.in
     args '-usejavacp'
 }
+
+// Las reglas del curso —sin var, sin while, sin return— se revisan antes de
+// correr las pruebas. Un programa que las rompe no llega a las pruebas.
+tasks.named('test') {
+    dependsOn 'scalastyleCheck'
+}
