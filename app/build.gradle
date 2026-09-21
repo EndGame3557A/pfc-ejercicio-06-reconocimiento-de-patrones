@@ -47,7 +47,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'ejercicio.App'
+    mainClass = 'taller.App'
 }
 
 task repl(type:JavaExec) {
