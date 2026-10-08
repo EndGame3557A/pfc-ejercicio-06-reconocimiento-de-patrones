@@ -1,50 +1,38 @@
 package taller
 
-// Una figura tiene nombre, área y perímetro. Qué vale cada uno lo decide
-// la figura concreta; compararlas por área es igual para todas.
 abstract class Figura {
   def nombre: String
   def area: Double
   def perimetro: Double
-
-  // Responde si esta figura tiene más área que la otra.
-  def esMayorQue(otra: Figura): Boolean = false // Completar
+  def esMayorQue(otra: Figura): Boolean = area > otra.area
 }
 
-// Lo que se puede agrandar o encoger multiplicando sus medidas por k.
 trait Escalable {
   def escalar(k: Double): Figura
 }
 
-// Círculo de radio dado. Tal como está, todas las figuras tienen nombre
-// vacío, área y perímetro cero, y escalarlas las deja igual.
 class Circulo(val radio: Double) extends Figura with Escalable {
-  def nombre: String = "" // Completar
-  def area: Double = 0.0 // Completar
-  def perimetro: Double = 0.0 // Completar
-  def escalar(k: Double): Figura = this // Completar
+  def nombre: String = "círculo"
+  def area: Double = math.Pi * radio * radio
+  def perimetro: Double = 2 * math.Pi * radio
+  def escalar(k: Double): Figura = new Circulo(radio * k)
 }
 
-class Rectangulo(val base: Double, val altura: Double)
-    extends Figura with Escalable {
-  def nombre: String = "" // Completar
-  def area: Double = 0.0 // Completar
-  def perimetro: Double = 0.0 // Completar
-  def escalar(k: Double): Figura = this // Completar
+class Rectangulo(val base: Double, val altura: Double) extends Figura with Escalable {
+  def nombre: String = "rectángulo"
+  def area: Double = base * altura
+  def perimetro: Double = 2 * (base + altura)
+  def escalar(k: Double): Figura = new Rectangulo(base * k, altura * k)
 }
 
-// Un cuadrado es un rectángulo con los dos lados iguales. Se llama
-// "cuadrado" y al escalarlo sigue siendo un cuadrado.
 class Cuadrado(val lado: Double) extends Rectangulo(lado, lado) {
-  // Completar
+  override def nombre: String = "cuadrado"
+  override def escalar(k: Double): Figura = new Cuadrado(lado * k)
 }
 
-// Triángulo rectángulo: la base y la altura son los catetos, y el
-// tercer lado sale de ellos.
-class Triangulo(val base: Double, val altura: Double)
-    extends Figura with Escalable {
-  def nombre: String = "" // Completar
-  def area: Double = 0.0 // Completar
-  def perimetro: Double = 0.0 // Completar
-  def escalar(k: Double): Figura = this // Completar
+class Triangulo(val base: Double, val altura: Double) extends Figura with Escalable {
+  def nombre: String = "triángulo"
+  def area: Double = base * altura / 2
+  def perimetro: Double = base + altura + math.sqrt(base * base + altura * altura)
+  def escalar(k: Double): Figura = new Triangulo(base * k, altura * k)
 }
